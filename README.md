@@ -9,11 +9,11 @@
   ╚══════╝╚═╝╚═╝  ╚═══╝ ╚═════╝       ╚═╝  ╚═╝╚═╝
 ```
 
-**LingXi — 自主渗透测试智能体（公开整理版）**
+**LingXi — 自主渗透测试智能体**
 
 _Autonomous Penetration Testing Intelligence_
 
-面向比赛/训练场景整理出的 LLM 驱动多 Agent 渗透辅助框架
+源自腾讯安全 Hackathon「智能渗透主战场 / 零界论坛赛道」的 LLM 驱动多 Agent 渗透辅助框架
 
 </div>
 
@@ -40,7 +40,7 @@ _Autonomous Penetration Testing Intelligence_
 
 ## 项目简介
 
-LingXi 是一个从比赛项目中整理出来的公开版自主渗透测试 Agent。它围绕“自动拉题 / 侦察 / 工具执行 / 策略纠偏 / Flag 提交 / 经验沉淀”的闭环设计，保留了可公开的核心架构：
+LingXi 是一个源自腾讯安全 Hackathon 比赛项目的自主渗透测试 Agent。它围绕“自动拉题 / 侦察 / 工具执行 / 策略纠偏 / Flag 提交 / 经验沉淀”的闭环设计，当前仓库保留了核心架构：
 
 - 主入口与调度流程
 - Agent 编排与提示词体系
@@ -50,12 +50,12 @@ LingXi 是一个从比赛项目中整理出来的公开版自主渗透测试 Age
 - Docker/Kali 基础运行层
 - `ctf_writeups_kb` 代码与测试
 
-公开仓库采用“核心开源 + 扩展私有”的边界策略：
+当前仓库聚焦可复用核心能力，并遵循“核心开源 + 扩展私有”的边界：
 
-- 保留 LingXi 名称与比赛项目背景
-- 不公开历史 Git 记录
+- 保留 LingXi 名称与腾讯比赛项目背景
+- 不保留历史 Git 记录
 - 不附带论坛官方工具包、私有 PoC、Sliver 资产、运行日志、数据库、抓取归档或知识库快照
-- 缺失私有扩展时，公开版默认以“待命模式 + 可观察 + 可开发 + 可测试”的核心路径工作
+- 缺失这些本地扩展时，核心路径默认以“待命模式 + 可观察 + 可开发 + 可测试”的方式工作
 
 当前默认主执行链路已经演进为 `agent/sdk_runner.py` 中的 SDK Runner 体系，因此本文档也以这一现状描述架构与运行方式。
 
@@ -63,11 +63,11 @@ LingXi 是一个从比赛项目中整理出来的公开版自主渗透测试 Age
 
 ## 🏗️ 系统架构
 
-LingXi 延续 Planner / Executor / Reflector 的认知分层，但当前公开版更适合从“入口层 → 调度层 → 解题执行层 → 工具/MCP 层 → 记忆知识层 → 可观察层”来理解：
+LingXi 延续 Planner / Executor / Reflector 的认知分层，但当前仓库更适合从“入口层 → 调度层 → 解题执行层 → 工具/MCP 层 → 记忆知识层 → 可观察层”来理解：
 
 ```text
 ┌──────────────────────────────────────────────────────────────────────────────┐
-│                            LingXi Public Architecture                        │
+│                               LingXi Architecture                            │
 ├──────────────────────────────────────────────────────────────────────────────┤
 │  入口层                                                                      │
 │  main.py / config.py / runtime_env.py / .env                                │
@@ -218,7 +218,7 @@ LingXi/
 ├── docker/                    # 🐳 Kali 容器与执行环境
 ├── tests/                     # ✅ 主项目测试
 │
-├── extensions/                # 🧩 本地可选扩展挂载点（公开仓库默认不附带）
+├── extensions/                # 🧩 本地可选扩展挂载点（仓库默认不附带私有实现）
 │   ├── forum/                 #   论坛扩展
 │   ├── level2-pocs/           #   私有 PoC 扩展
 │   ├── skills/                #   本地技能目录
@@ -260,22 +260,22 @@ python -m pip install -r requirements.txt
 
 说明：
 
-- 开源仓库默认推荐 `python venv`，这是对外文档的标准路径
-- 我本地维护或验证时可以使用 `uv` 做加速，但这不是公开版前置条件
+- 文档默认推荐 `python venv`，这是对外安装与测试的标准路径
+- 维护者本地可以使用 `uv` 做加速，但这不是默认前置条件
 - `requirements.txt` 已包含 `mcp` 依赖；即使没有本地扩展，实现层也能正常导入并保持默认关闭
 
 ### 2. 依赖说明
 
-公开版建议把依赖拆成“核心必需”和“本地可选扩展”两层理解：
+建议把依赖拆成“核心必需”和“本地可选扩展”两层理解：
 
 | 项 | 是否必需 | 说明 |
 | --- | --- | --- |
-| Python 3.11+ | 必需 | 公开版主推荐 `venv` |
+| Python 3.11+ | 必需 | 当前文档主推荐 `venv` |
 | 一组可用 LLM 配置 | 必需 | 至少主攻手/顾问能正常响应 |
 | Docker / Docker Desktop | 可选但推荐 | 用于 `DOCKER_ENABLED=true` 时的 Kali 工作流 |
-| Kali 容器 | 可选但推荐 | 公开版保留 Docker/Kali 执行层 |
+| Kali 容器 | 可选但推荐 | 仓库保留 Docker/Kali 执行层 |
 | MCP 依赖 | 可选 | 代码内保留 MCP 桥接，但不强制启用任何私有服务 |
-| 本地技能目录 `extensions/skills/` | 可选 | 公开仓库不附带私有技能包 |
+| 本地技能目录 `extensions/skills/` | 可选 | 仓库默认不附带私有技能包 |
 | 论坛扩展 `extensions/forum/` | 可选 | 缺省关闭，不附带实现 |
 | PoC 扩展 `extensions/level2-pocs/` | 可选 | 缺省关闭，不附带实现 |
 | Sliver client / config | 可选 | 只保留桥接接口，不附带资产 |
@@ -288,7 +288,7 @@ python -m pip install -r requirements.txt
 cp .env.example .env
 ```
 
-公开版最小可运行配置示例：
+最小可运行配置示例：
 
 ```env
 # 平台地址留空时进入待命模式
@@ -322,7 +322,7 @@ cd docker
 docker compose up -d
 ```
 
-如果你只想验证公开版主程序、Web、记忆和知识层，这一步可以暂时跳过。
+如果你只想验证主程序、Web、记忆和知识层，这一步可以暂时跳过。
 
 ### 5. 启动 LingXi
 
@@ -343,7 +343,7 @@ python main.py --web-only --port 7890
 
 下面这些变量最常用：
 
-| 变量 | 说明 | 公开版默认/备注 |
+| 变量 | 说明 | 默认/备注 |
 | --- | --- | --- |
 | `COMPETITION_BASE_URL` | 平台展示入口 | 默认留空，进入待命模式 |
 | `COMPETITION_API_BASE_URL` | 平台 API 入口 | 默认留空 |
@@ -374,7 +374,7 @@ python main.py --web-only --port 7890
 
 ## 各大 CTF WP 知识库
 
-`ctf_writeups_kb/` 是公开版保留的外部知识库子项目，职责是：
+`ctf_writeups_kb/` 是当前仓库保留的外部知识库子项目，职责是：
 
 - 采集和整理可公开来源的 CTF Writeup
 - 构建 embedding / 检索 / 轻量索引链路
@@ -401,7 +401,7 @@ Advisor / API / CLI
 
 注意：
 
-- 公开仓库只附带代码、测试和 `data/source_library_cn.json`
+- 当前仓库只附带代码、测试和 `data/source_library_cn.json`
 - `writeups_raw.jsonl`、`writeups_index.jsonl`、`milvus.db`、`qdrant/` 都是本地生成产物
 - 不会随公共仓库一起发布
 
@@ -409,11 +409,11 @@ Advisor / API / CLI
 
 ## 扩展能力说明
 
-公开版保留扩展接口，但不附带私有实现。主要包括：
+当前仓库保留扩展接口，但不附带私有实现。主要包括：
 
 ### 1. Docker / Kali
 
-- 公开版保留 `docker/`、`kali_container.py`、`tools/kali_mcp.py`
+- 仓库保留 `docker/`、`kali_container.py`、`tools/kali_mcp.py`
 - 适用于本地 Kali 容器中的工具执行与受控工作流
 - 没有 Docker 时不影响待命模式、Dashboard、记忆和知识层
 
@@ -425,7 +425,7 @@ Advisor / API / CLI
 
 ### 3. 技能目录
 
-公开版支持本地挂接以下技能/扩展目录：
+当前仓库支持本地挂接以下技能/扩展目录：
 
 - `extensions/skills/`
 - `extensions/additional-skills/`
@@ -434,16 +434,16 @@ Advisor / API / CLI
 
 说明：
 
-- 这些目录在公开仓库中默认不存在或为空
+- 这些目录在仓库中默认不存在或为空
 - 如果你在本地有私有技能包或专项扩展，可以自行挂接
-- 不应把这些私有扩展再提交回公开仓库
+- 不应把这些私有扩展再提交回当前 GitHub 仓库
 
 ### 4. 论坛 / PoC / Sliver
 
-- 论坛赛道能力在公开版中是“可选论坛扩展”
-- Level2/专项 PoC 能力在公开版中是“本地 PoC 扩展”
-- Sliver 能力在公开版中是“可选控制面扩展”
-- 三者默认关闭，缺失时不应阻断公开版基础运行
+- 论坛赛道能力在当前仓库中表现为“可选论坛扩展”
+- Level2/专项 PoC 能力在当前仓库中表现为“本地 PoC 扩展”
+- Sliver 能力在当前仓库中表现为“可选控制面扩展”
+- 三者默认关闭，缺失时不应阻断基础运行
 
 ---
 
@@ -503,8 +503,8 @@ bash start_daemon.sh --logs
 
 说明：
 
-- 公开版不附带比赛环境专用部署脚本
-- 公开版推荐先跑通 `venv + 待命模式 + Dashboard`
+- 当前仓库不附带比赛环境专用部署脚本
+- 建议先跑通 `venv + 待命模式 + Dashboard`
 - 之后再按需补 Docker/Kali、MCP、技能目录或私有扩展
 
 ---
@@ -521,13 +521,13 @@ python -m unittest tests.test_level2_poc_tool
 python -m unittest ctf_writeups_kb.tests.test_api_search
 ```
 
-公开版文档默认仍然使用 `python venv` 作为安装与测试方式；维护者本地可以使用 `uv` 做开发加速，但不把 `uv` 作为开源用户的必选前提。
+本文档默认仍然使用 `python venv` 作为安装与测试方式；维护者本地可以使用 `uv` 做开发加速，但不把 `uv` 作为默认前提。
 
 ---
 
 ## 参考项目与致谢
 
-LingXi 的公开版实现参考了以下项目或技术栈：
+LingXi 的实现参考了以下项目或技术栈：
 
 - Claude Code SDK
 - LangChain

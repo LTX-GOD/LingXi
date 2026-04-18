@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ling-Xi — 知识库中心</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="brand">
+            <span class="logo">⚡</span>
+            <h1>Ling-Xi</h1>
+            <span class="subtitle">知识库中心</span>
+        </div>
+        <div class="header-right">
+            <a class="btn btn-sm btn-dim" href="/">返回控制台</a>
+            <button class="btn btn-sm btn-create" id="btnKnowledgeRefresh">刷新</button>
+        </div>
+    </header>
+
+    <main class="knowledge-page">
+        <section class="card knowledge-sidebar-card">
+            <div class="tasks-header">
+                <h2>📚 知识模块</h2>
+                <span id="knowledgeServiceBadge" class="knowledge-home-pill idle">加载中</span>
+            </div>
+            <div id="knowledgeServiceSummary" class="knowledge-service-summary"></div>
+            <div id="knowledgeBuckets" class="knowledge-buckets-list"></div>
+        </section>
+
+        <section class="knowledge-main-column">
+            <section class="card knowledge-toolbar-card">
+                <div class="tasks-header">
+                    <h2>🔎 检索与筛选</h2>
+                    <span id="knowledgeToolbarHint" class="knowledge-toolbar-hint">默认浏览最近记录</span>
+                </div>
+                <form id="knowledgeSearchForm" class="knowledge-search-form">
+                    <input id="knowledgeQuery" class="input-control" type="text" placeholder="输入关键词，例如 ssti / jwt / upload / xss">
+                    <select id="knowledgeCategory" class="input-control">
+                        <option value="">全部类别</option>
+                    </select>
+                    <select id="knowledgeTopK" class="input-control">
+                        <option value="10">Top 10</option>
+                        <option value="20">Top 20</option>
+                        <option value="30">Top 30</option>
+                    </select>
+                    <button class="btn btn-start" type="submit">搜索</button>
+                    <button class="btn btn-dim" type="button" id="btnKnowledgeBrowse">最近记录</button>
+                </form>
+            </section>
+
+            <section class="card knowledge-results-card">
+                <div class="tasks-header">
+                    <h2 id="knowledgeResultsTitle">知识记录</h2>
+                    <span id="knowledgeResultsMeta" class="knowledge-toolbar-hint"></span>
+                </div>
+                <div id="knowledgeResults" class="knowledge-results-list"></div>
+            </section>
+        </section>
+    </main>
+
+    <script src="/static/knowledge.js"></script>
+</body>
+</html>

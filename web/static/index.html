@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ling-Xi — 自主渗透控制台</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 顶部 -->
+    <header>
+        <div class="brand">
+            <span class="logo">⚡</span>
+            <h1>Ling-Xi</h1>
+            <span class="subtitle">自主渗透测试智能体</span>
+        </div>
+        <div class="header-right">
+            <div class="agent-controls">
+                <button class="btn btn-start" id="btnStartAll" onclick="agentStart()">▶ 启动</button>
+                <button class="btn btn-pause" id="btnPauseAll" onclick="agentPause()">⏸ 暂停</button>
+            </div>
+            <a class="btn btn-sm btn-dim" href="/knowledge">知识库页</a>
+            <span class="status-dot" id="statusDot"></span>
+            <span id="statusText">连接中...</span>
+            <span class="runtime" id="runtime">00:00:00</span>
+        </div>
+    </header>
+
+    <!-- 统计栏 -->
+    <section class="metrics-bar">
+        <div class="metric"><div class="metric-value" id="totalSolved">0</div><div class="metric-label">已攻克</div></div>
+        <div class="metric"><div class="metric-value" id="totalScore">0</div><div class="metric-label">总分</div></div>
+        <div class="metric"><div class="metric-value" id="activeTasks">0</div><div class="metric-label">进行中</div></div>
+        <div class="metric"><div class="metric-value" id="totalTasks">0</div><div class="metric-label">总任务</div></div>
+    </section>
+
+    <!-- 主体 -->
+    <main>
+        <!-- 左侧: 赛区 -->
+        <section class="card zones-card">
+            <h2>🏰 赛区进度</h2>
+            <div id="zones"></div>
+        </section>
+
+        <!-- 右侧: 任务列表 -->
+        <section class="card tasks-card">
+            <div class="tasks-header">
+                <h2>🎯 任务列表</h2>
+                <button class="btn btn-sm btn-create" onclick="showCreateModal()">+ 新建任务</button>
+            </div>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>题目编号</th>
+                            <th>难度</th>
+                            <th>分值</th>
+                            <th>目标</th>
+                            <th>状态</th>
+                            <th>Flag</th>
+                            <th>尝试</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tasksBody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 知识库 -->
+        <section class="card knowledge-card">
+            <div class="tasks-header">
+                <h2>📚 知识系统</h2>
+                <div class="header-actions">
+                    <a class="btn btn-sm btn-create" href="/knowledge">进入知识库页</a>
+                    <button class="btn btn-sm btn-dim" onclick="refreshKnowledge()">刷新</button>
+                </div>
+            </div>
+            <div id="knowledgeStatusLine" class="knowledge-home-status"></div>
+            <div id="knowledgeStats" class="knowledge-stats"></div>
+        </section>
+
+        <!-- 底部: 日志 -->
+        <section class="card log-card">
+            <div class="tasks-header">
+                <h2>📋 实时日志</h2>
+                <button class="btn btn-sm btn-dim" onclick="clearLogs()">清空</button>
+            </div>
+            <div class="log-container" id="logContainer"></div>
+        </section>
+    </main>
+
+    <!-- 新建任务弹窗 -->
+    <div class="modal-overlay" id="createModal" style="display:none">
+        <div class="modal">
+            <h3>新建攻击任务</h3>
+            <div class="form-group">
+                <label>题目编号</label>
+                <input type="text" id="inputCode" placeholder="例如 SRC-001">
+            </div>
+            <div class="form-group">
+                <label>目标地址</label>
+                <input type="text" id="inputTarget" placeholder="例如 10.0.1.11:80">
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>难度</label>
+                    <select id="inputDiff">
+                        <option value="easy">简单</option>
+                        <option value="medium">中等</option>
+                        <option value="hard">困难</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>分值</label>
+                    <input type="number" id="inputPoints" value="100">
+                </div>
+                <div class="form-group">
+                    <label>赛区</label>
+                    <select id="inputZone">
+                        <option value="z1">识器·明理 (SRC)</option>
+                        <option value="z2">洞见·虚实 (CVE)</option>
+                        <option value="z3">执刃·循迹 (网络)</option>
+                        <option value="z4">铸剑·止戈 (域渗透)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-dim" onclick="hideCreateModal()">取消</button>
+                <button class="btn btn-start" onclick="createTask()">创建并启动</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

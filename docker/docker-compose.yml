@@ -1,0 +1,19 @@
+services:
+  kali:
+    image: kalilinux/kali-rolling:latest
+    container_name: kali-pentest
+    restart: unless-stopped
+    environment:
+      DDDD2_PATH: /usr/local/bin/dddd2
+    stdin_open: true
+    tty: true
+    network_mode: host
+    working_dir: /root
+    command: ["bash", "-lc", "mkdir -p /tmp/agent-scripts && tail -f /dev/null"]
+    volumes:
+      - kali-data:/root
+      - /tmp/agent-scripts:/tmp/agent-scripts
+      - ../dddd2:/usr/local/bin/dddd2:ro
+
+volumes:
+  kali-data:

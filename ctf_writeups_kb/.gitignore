@@ -1,0 +1,27 @@
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+.venv/
+
+# project data
+.env
+.env.*
+data/*
+data/*.lock
+data/*.state.json
+data/.milvus.db.lock
+*.db
+*.sqlite
+*.sqlite3
+!data/milvus.db
+!data/writeups_raw.jsonl
+!data/writeups_index.jsonl
+!data/source_library_cn.json
+.milvus/
+.ace-tool/
+.tmp_qdrant_*/
+backup_original/
+tests/__pycache__/

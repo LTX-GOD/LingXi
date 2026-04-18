@@ -1,0 +1,47 @@
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Local extension mounts
+extensions/
+configs/
+.sliver-client*
+sliver-client*
+
+# Runtime data
+data/knowledge/
+wp/
+logs/
+.pids/
+*.log
+*.pid
+*.db
+*.sqlite
+*.sqlite3
+*.jsonl
+
+# Knowledge base generated data
+ctf_writeups_kb/data/writeups_raw.jsonl
+ctf_writeups_kb/data/writeups_index.jsonl
+ctf_writeups_kb/data/milvus.db
+ctf_writeups_kb/data/qdrant/
+ctf_writeups_kb/data/cache/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+env/
+
+# Editors and OS noise
+.idea/
+.vscode/
+Thumbs.db
+Desktop.ini

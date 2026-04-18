@@ -1,0 +1,173 @@
+{
+  "version": 1,
+  "description": "Curated high-quality Chinese CTF writeup sources for batch crawling.",
+  "presets": {
+    "cn-curated": [
+      "qwb-2025",
+      "qwb-2025-web",
+      "qwb-2025-pwn",
+      "greatwall-2022",
+      "greatwall-2022-web",
+      "greatwall-2022-crypto",
+      "greatwall-2022-pwn",
+      "wangding-2024",
+      "wangding-2024-white-tiger",
+      "wangding-2024-crypto",
+      "wangding-2024-csdn-full",
+      "echosec-greatwall-2022",
+      "tiange-greatwall-2022",
+      "vp-union-justctf-2023"
+    ],
+    "cn-major": [
+      "qwb-2025",
+      "greatwall-2022",
+      "wangding-2024"
+    ],
+    "cn-web": [
+      "qwb-2025-web",
+      "greatwall-2022-web"
+    ],
+    "cn-pwn": [
+      "qwb-2025-pwn",
+      "greatwall-2022-pwn",
+      "wangding-2024-white-tiger"
+    ],
+    "cn-crypto": [
+      "greatwall-2022-crypto",
+      "wangding-2024-crypto",
+      "wangding-2024-csdn-full"
+    ],
+    "cn-teams": [
+      "echosec-greatwall-2022",
+      "tiange-greatwall-2022",
+      "vp-union-justctf-2023"
+    ]
+  },
+  "sources": [
+    {
+      "id": "qwb-2025",
+      "event": "强网杯 2025",
+      "category": "pwn",
+      "year": 2025,
+      "source": "ctfiot",
+      "url": "https://www.ctfiot.com/275226.html",
+      "title": "2025强网杯 write up By Ginkgo"
+    },
+    {
+      "id": "qwb-2025-web",
+      "event": "强网杯 2025",
+      "category": "web",
+      "year": 2025,
+      "source": "csdn",
+      "url": "https://blog.csdn.net/weixin_47575900/article/details/153720725",
+      "title": "强网杯2025 Web题目writeup"
+    },
+    {
+      "id": "qwb-2025-pwn",
+      "event": "强网杯 2025",
+      "category": "pwn",
+      "year": 2025,
+      "source": "csdn",
+      "url": "https://blog.csdn.net/2401_86553036/article/details/153685492",
+      "title": "强网杯_2025_线上赛——部分pwn题writeup"
+    },
+    {
+      "id": "greatwall-2022",
+      "event": "第二届长城杯 2022",
+      "year": 2022,
+      "source": "csdn",
+      "url": "https://blog.csdn.net/ZXW_NUDT/article/details/126509518",
+      "title": "天格战队WriteUp-2022年第二届长城杯网络安全大赛"
+    },
+    {
+      "id": "greatwall-2022-web",
+      "event": "第二届长城杯 2022",
+      "category": "web",
+      "year": 2022,
+      "source": "csdn",
+      "url": "https://blog.csdn.net/ZXW_NUDT/article/details/126509518",
+      "title": "天格战队WriteUp-2022年第二届长城杯网络安全大赛（Web）"
+    },
+    {
+      "id": "greatwall-2022-crypto",
+      "event": "第二届长城杯 2022",
+      "category": "crypto",
+      "year": 2022,
+      "source": "csdn",
+      "url": "https://blog.csdn.net/ZXW_NUDT/article/details/126509518",
+      "title": "天格战队WriteUp-2022年第二届长城杯网络安全大赛（Crypto）"
+    },
+    {
+      "id": "greatwall-2022-pwn",
+      "event": "长城杯 2022",
+      "category": "pwn",
+      "year": 2022,
+      "source": "csdn",
+      "url": "https://blog.csdn.net/echosec/article/details/126593074",
+      "title": "2022-长城杯初赛Write up-by EchoSec安全团队"
+    },
+    {
+      "id": "wangding-2024",
+      "event": "第四届网鼎杯 2024",
+      "year": 2024,
+      "source": "ctfiot",
+      "url": "https://www.ctfiot.com/213306.html",
+      "title": "2024第四届网鼎杯白虎组 writeup"
+    },
+    {
+      "id": "wangding-2024-white-tiger",
+      "event": "第四届网鼎杯白虎组 2024",
+      "category": "pwn",
+      "year": 2024,
+      "source": "ctfiot",
+      "url": "https://www.ctfiot.com/213306.html",
+      "title": "2024第四届网鼎杯白虎组 writeup（Pwn）"
+    },
+    {
+      "id": "wangding-2024-crypto",
+      "event": "第四届网鼎杯 2024",
+      "category": "crypto",
+      "year": 2024,
+      "source": "ctfiot",
+      "url": "https://www.ctfiot.com/217506.html",
+      "title": "2024 网鼎杯 朱雀&玄武"
+    },
+    {
+      "id": "wangding-2024-csdn-full",
+      "event": "第四届网鼎杯 2024",
+      "category": "crypto",
+      "year": 2024,
+      "source": "csdn",
+      "url": "https://blog.csdn.net/qq_44395288/article/details/144059651",
+      "title": "2024第四届网鼎杯网络安全大赛官方资格赛全赛道WriteUp"
+    },
+    {
+      "id": "echosec-greatwall-2022",
+      "event": "第二届长城杯 2022",
+      "year": 2022,
+      "team": "EchoSec",
+      "source": "team_blog",
+      "url": "https://blog.csdn.net/echosec/article/details/126593074",
+      "title": "EchoSec安全团队 长城杯 WriteUp"
+    },
+    {
+      "id": "tiange-greatwall-2022",
+      "event": "第二届长城杯 2022",
+      "year": 2022,
+      "team": "天格",
+      "source": "team_blog",
+      "url": "https://blog.csdn.net/ZXW_NUDT/article/details/126509518",
+      "title": "天格战队 长城杯 WriteUp"
+    },
+    {
+      "id": "vp-union-justctf-2023",
+      "event": "justCTF 2023",
+      "category": "pwn",
+      "year": 2023,
+      "team": "VP-Union",
+      "source": "ctfiot",
+      "url": "https://www.ctfiot.com/119315.html",
+      "title": "justCTF 2023 Writeup by VP-Union"
+    }
+  ]
+}
